@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "tooltip-area": [
+        "dist/tooltip-area"
+      ],
+      "tooltip-area/*": [
+        "dist/tooltip-area/*"
+      ]
+    }
   }
 }

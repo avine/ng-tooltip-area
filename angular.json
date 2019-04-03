@@ -134,6 +134,41 @@
           }
         }
       }
+    },
+    "tooltip-area": {
+      "root": "projects/tooltip-area",
+      "sourceRoot": "projects/tooltip-area/src",
+      "projectType": "library",
+      "prefix": "ta",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/tooltip-area/tsconfig.lib.json",
+            "project": "projects/tooltip-area/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/tooltip-area/src/test.ts",
+            "tsConfig": "projects/tooltip-area/tsconfig.spec.json",
+            "karmaConfig": "projects/tooltip-area/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/tooltip-area/tsconfig.lib.json",
+              "projects/tooltip-area/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-tooltip-area"
