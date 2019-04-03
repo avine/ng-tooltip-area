@@ -1,0 +1,11 @@
+<div class="tooltip-menu__container">
+  <span
+    class="tooltip-menu__close"
+    (click)="close.emit()">
+    Close
+  </span>
+
+  <div class="tooltip-menu__content">
+    <ng-content></ng-content>
+  </div>
+</div>

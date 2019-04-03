@@ -1,0 +1,18 @@
+<div #container
+  class="tooltip-area__container"
+  (click)="containerClickHandler($event)">
+
+  <ng-content select="ta-tooltip-area-container"></ng-content>
+
+  <div #popup
+    *ngIf="popupVisible"
+    @animatePopup
+    class="tooltip-area__popup"
+    [class.tooltip-area__popup--fixed]="positionFixed"
+    [style.left]="popupPosition.left + 'px'"
+    [style.top]="popupPosition.top + 'px'"
+    (click)="popupClickHandler($event)">
+
+    <ng-content select="ta-tooltip-area-popup"></ng-content>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.tooltip-menu__container {
+  position: relative;
+}
+
+.tooltip-menu__content {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tooltip-menu__close {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.tooltip-menu__content {
+  border-color: #ccc;
+  background-color: #fafafa;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.075);
+}
+
+.tooltip-menu__close {
+  background: dodgerblue;
+}

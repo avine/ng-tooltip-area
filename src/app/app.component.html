@@ -1,21 +1,37 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="demo-tooltip-area">
+  <ta-tooltip-area
+    [positionFixed]="positionFixed"
+    [(popupFlag)]="popupFlag">
+    <ta-tooltip-area-container>
+
+      <div (click)="popupFlag = 'open'; content = 'static'" class="demo-tooltip-area__box demo-tooltip-area__box--static">static</div>
+      <div (click)="popupFlag = 'open'; content = 'relative'" class="demo-tooltip-area__box demo-tooltip-area__box--relative">relative</div>
+      <div (click)="popupFlag = 'open'; content = 'absolute'" class="demo-tooltip-area__box demo-tooltip-area__box--absolute">absolute</div>
+      <div (click)="popupFlag = 'open'; content = 'fixed'" class="demo-tooltip-area__box demo-tooltip-area__box--fixed">fixed</div>
+
+      <div (click)="popupFlag = 'open'; content = 'relative'" class="demo-tooltip-area__box demo-tooltip-area__box--relative">
+        <div (click)="popupFlag = 'open'; content = 'absolute'" class="demo-tooltip-area__box demo-tooltip-area__box--absolute">
+          RELATIVE + ABSOLUTE
+        </div>
+      </div>
+
+    </ta-tooltip-area-container>
+    <ta-tooltip-area-popup>
+
+      <ta-tooltip-menu (close)="popupFlag = 'close'">
+        <ta-tooltip-menu-item>123 456 789 456 123</ta-tooltip-menu-item>
+        <ta-tooltip-menu-item>Hello world</ta-tooltip-menu-item>
+        <ta-tooltip-menu-item>Lorem ipsum</ta-tooltip-menu-item>
+        <ta-tooltip-menu-item>blabla blabla</ta-tooltip-menu-item>
+      </ta-tooltip-menu>
+
+    </ta-tooltip-area-popup>
+  </ta-tooltip-area>
+
+  <button (click)="popupFlag = 'open'">Open</button>
+  <button (click)="popupFlag = 'close'">Close</button>
+
+  <button (click)="positionFixed = !positionFixed">positionFixed {{positionFixed}}</button>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
 <router-outlet></router-outlet>
