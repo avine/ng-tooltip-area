@@ -1,37 +1,52 @@
-<div class="demo-tooltip-area">
-  <ta-tooltip-area
-    [positionFixed]="positionFixed"
-    [(popupFlag)]="popupFlag">
-    <ta-tooltip-area-container>
+<div class="app-container">
+  <h1 class="app-title">Ng Tooltip Area</h1>
+  <div class="app-content">
 
-      <div (click)="popupFlag = 'open'; content = 'static'" class="demo-tooltip-area__box demo-tooltip-area__box--static">static</div>
-      <div (click)="popupFlag = 'open'; content = 'relative'" class="demo-tooltip-area__box demo-tooltip-area__box--relative">relative</div>
-      <div (click)="popupFlag = 'open'; content = 'absolute'" class="demo-tooltip-area__box demo-tooltip-area__box--absolute">absolute</div>
-      <div (click)="popupFlag = 'open'; content = 'fixed'" class="demo-tooltip-area__box demo-tooltip-area__box--fixed">fixed</div>
+    <ta-tooltip-area
+      [positionFixed]="positionFixed"
+      [(popupFlag)]="popupFlag">
+      <ta-tooltip-area-container>
 
-      <div (click)="popupFlag = 'open'; content = 'relative'" class="demo-tooltip-area__box demo-tooltip-area__box--relative">
-        <div (click)="popupFlag = 'open'; content = 'absolute'" class="demo-tooltip-area__box demo-tooltip-area__box--absolute">
-          RELATIVE + ABSOLUTE
+        <div (click)="openTooltip('Static')" class="app-box app-box--static">Static</div>
+        <div (click)="openTooltip('Relative')" class="app-box app-box--relative">Relative</div>
+        <div (click)="openTooltip('Absolute')" class="app-box app-box--absolute">Absolute</div>
+
+        <div
+          (click)="openTooltip('Fixed')"
+          class="app-box app-box--fixed"
+          [class.app-box--fixed-fail]="!positionFixed"
+        >Fixed</div>
+
+        <div class="app-box app-box--relative">
+          ...
+          <div (click)="openTooltip('Rel &gt; Abs')" class="app-box app-box--absolute">
+            Rel &gt; Abs
+          </div>
         </div>
-      </div>
 
-    </ta-tooltip-area-container>
-    <ta-tooltip-area-popup>
+      </ta-tooltip-area-container>
+      <ta-tooltip-area-popup>
 
-      <ta-tooltip-menu (close)="popupFlag = 'close'">
-        <ta-tooltip-menu-item>123 456 789 456 123</ta-tooltip-menu-item>
-        <ta-tooltip-menu-item>Hello world</ta-tooltip-menu-item>
-        <ta-tooltip-menu-item>Lorem ipsum</ta-tooltip-menu-item>
-        <ta-tooltip-menu-item>blabla blabla</ta-tooltip-menu-item>
-      </ta-tooltip-menu>
+        <ta-tooltip-menu (close)="popupFlag = 'close'">
+          <ta-tooltip-menu-item>Content: "{{ content }}"</ta-tooltip-menu-item>
+          <ta-tooltip-menu-item>Hello world</ta-tooltip-menu-item>
+        </ta-tooltip-menu>
 
-    </ta-tooltip-area-popup>
-  </ta-tooltip-area>
+      </ta-tooltip-area-popup>
+    </ta-tooltip-area>
 
-  <button (click)="popupFlag = 'open'">Open</button>
-  <button (click)="popupFlag = 'close'">Close</button>
+    <div class="app-actions">
+      <button (click)="popupFlag = 'open'">Open</button>
+      <button (click)="popupFlag = 'close'">Close</button>
+      <button (click)="positionFixed = !positionFixed">Position {{ positionFixed ? 'fixed' : 'absolute' }}</button>
+    </div>
 
-  <button (click)="positionFixed = !positionFixed">positionFixed {{positionFixed}}</button>
+    <div class="app-actions-msg" *ngIf="!positionFixed">
+      Unable to calculate the tooltip position for "fixed" container.
+    </div>
+
+
+  </div>
 </div>
 
 <router-outlet></router-outlet>

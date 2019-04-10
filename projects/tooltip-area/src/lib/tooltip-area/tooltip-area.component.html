@@ -5,8 +5,8 @@
   <ng-content select="ta-tooltip-area-container"></ng-content>
 
   <div #popup
-    *ngIf="popupVisible"
     @animatePopup
+    *ngIf="popupVisible"
     class="tooltip-area__popup"
     [class.tooltip-area__popup--fixed]="positionFixed"
     [style.left]="popupPosition.left + 'px'"

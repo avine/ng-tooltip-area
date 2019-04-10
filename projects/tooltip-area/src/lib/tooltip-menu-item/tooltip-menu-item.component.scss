@@ -3,11 +3,11 @@
 }
 
 .tooltip-menu-item--link {
-  transition: background-color ease 200ms;
+  transition: background-color ease 200ms, color ease 200ms;
   cursor: pointer;
 }
 
 .tooltip-menu-item--link:hover {
-  background-color: #f5f5f5;
+  background-color: rgba(0, 0, 0, 0.05);
   color: dodgerblue;
 }

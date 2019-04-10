@@ -10,5 +10,10 @@ export class AppComponent {
 
   content = '';
 
-  positionFixed = false;
+  positionFixed = true;
+
+  openTooltip(content: string) {
+    this.popupFlag = 'open';
+    this.content = content;
+  }
 }

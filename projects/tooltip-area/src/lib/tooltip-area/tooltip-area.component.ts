@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 
-import { TooltipAreaCoord, TooltipAreaPopupFlag, TooltipAreaSize } from './tooltip-area.model';
+import { TooltipAreaCoord, TooltipAreaPopupFlag, TooltipAreaSize } from '../tooltip-area.model';
 
 @Component({
   selector: 'ta-tooltip-area',
@@ -23,6 +23,8 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
   @Input() popupFlag: TooltipAreaPopupFlag = '';
   @Output() popupFlagChange = new EventEmitter<TooltipAreaPopupFlag>(true); // isAsync === true
 
+  @Input() logs = true;
+
   private preventPopupCloseFlag = false;
 
   popupVisible = false;
@@ -32,6 +34,12 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
   private closePopupHandler = () => this.popupVisible = false;
 
   constructor() { }
+
+  log(...msg: any[]) {
+    if (this.logs) {
+      console.log(...msg);
+    }
+  }
 
   ngOnInit() {
     if (window) {
@@ -52,7 +60,8 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private popupFlagHandler(popupFlag: TooltipAreaPopupFlag) {
-    console.log(`Popup flag: ${popupFlag || 'default'}`);
+    this.log(`Popup flag: ${popupFlag || 'default'}`);
+
     switch (popupFlag) {
       case 'open': {
         // If the `popupFlag` change was triggered by a click event on the `#container`,
@@ -64,11 +73,13 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
         this.resetPopupFlag();
         break;
       }
+
       case 'close': {
         this.popupVisible = false;
         this.resetPopupFlag();
         break;
       }
+
       default: {
         // If the `popupFlag` change was NOT triggered by a click event (but programmatically),
         // then the method `containerClickHandler` is NOT going to be called.
@@ -85,7 +96,7 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   containerClickHandler(event: MouseEvent) {
-    console.log('Container click handler');
+    this.log('Container click handler');
 
     if (!this.preventPopupCloseFlag) {
       // Clicking anywhere inside the container closes the popup (unless `preventPopupCloseFlag` is true)
@@ -106,23 +117,28 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
       x: event.clientX,
       y: event.clientY,
     };
+
     const viewportSize = {
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
     };
+
     this.setPopupPosition(pointerCoord, viewportSize);
   }
 
   private setPopupPositionAbsolute(event: MouseEvent) {
     const { x, y } = this.getRealOffsetToContainer(event.target as HTMLElement);
+
     const pointerCoord = {
       x: event.offsetX + x,
       y: event.offsetY + y,
     };
+
     const containerSize = {
       width: this.container.nativeElement.offsetWidth,
       height: this.container.nativeElement.offsetHeight,
     };
+
     this.setPopupPosition(pointerCoord, containerSize);
   }
 
@@ -144,29 +160,32 @@ export class TooltipAreaComponent implements OnInit, OnDestroy, OnChanges {
       top: coord.y - popupShift.y,
     };
 
-    console.log('popupPosition', this.popupPosition);
+    this.log('popupPosition', this.popupPosition);
   }
 
   private getRealOffsetToContainer(fromTarget: HTMLElement): TooltipAreaCoord {
     const offset = { x: 0, y: 0 };
+
     let parent = fromTarget;
+
     do {
       if (window.getComputedStyle(parent).position !== 'static') {
         offset.x += parent.offsetLeft;
         offset.y += parent.offsetTop;
       }
+
       parent = parent.parentNode as HTMLElement;
     } while (
       parent && parent !== this.container.nativeElement
     );
+
     return offset;
   }
 
   popupClickHandler(event: MouseEvent) {
-    console.log('Popup click handler');
+    this.log('Popup click handler');
 
     // Clicking on the popup should NOT trigger the `containerClickHandler`.
     event.stopPropagation();
   }
 }
-

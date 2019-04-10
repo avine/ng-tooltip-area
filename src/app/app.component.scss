@@ -1,33 +1,87 @@
-.demo-tooltip-area {
-  height: 500px;
-  max-height: 100%;
-  border: 1px dashed blue;
+.app-container {
+  margin: 0 auto;
   box-sizing: border-box;
+  height: 100%;
+  width: 960px;
+  max-width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-template-rows: 3rem auto;
+  grid-gap: 2rem;
 }
 
-.demo-tooltip-area__box {
-  border: 1px dotted red;
-  width: 10rem;
-  height: 10rem;
-  background: rgba(255, 0, 0, 0.1);
+.app-title {
+  margin: 0;
+  line-height: 3rem;
+  text-align: center;
 }
 
-.demo-tooltip-area__box--static {
-  position: static;
-}
-
-.demo-tooltip-area__box--relative {
+.app-content {
   position: relative;
-  left: 15rem;
+  border-radius: 4px;
+  box-shadow: 0 0.2rem 0.6rem 0.4rem rgba(0, 0, 0, 0.075);
+  border: 1px solid #ccc;
+  background-color: #fff;
 }
 
-.demo-tooltip-area__box--absolute {
+.app-box {
+  width: 7rem;
+  height: 7rem;
+  padding-top: 3rem;
+  line-height: 1rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) inset;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.app-box--static {
+  position: static;
+  background: #E1F5FE;
+}
+
+.app-box--relative {
+  position: relative;
+  top: 20px;
+  left: 10px;
+  background: #E8F5E9;
+  margin-bottom: 2rem;
+}
+
+.app-box--absolute {
   position: absolute;
-  left: 30rem;
+  bottom: 10px;
+  left: 75%;
+  background: #FFF8E1;
 }
 
-.demo-tooltip-area__box--fixed {
+.app-box--fixed {
   position: fixed;
   left: 50%;
   top: 50%;
+  background: #FFEBEE;
+}
+
+.app-box--fixed-fail {
+  border: 1px solid #F44336;
+}
+
+.app-actions {
+  position: absolute;
+  z-index: 9999;
+  right: 1rem;
+  top: 1rem;
+
+  > button {
+    margin-left: 0.5rem;
+  }
+}
+
+.app-actions-msg {
+  position: absolute;
+  z-index: 9999;
+  right: 1rem;
+  top: 3.5rem;
+  color: #F44336;
 }
